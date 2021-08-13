@@ -1,1 +1,394 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <!-- First JQuery, Bootstrap, etc, ... -->
+    <script src="https://genqdatabase-12f6.restdb.io/rest/_jsapi.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+    *,
+    *:before,
+    *:after {
+        -webkit-box-sizing: inherit;
+        -moz-box-sizing: inherit;
+        box-sizing: inherit;
+    }
+
+    ::-webkit-input-placeholder {
+        color: #56585b;
+    }
+
+    ::-moz-placeholder {
+        color: #56585b;
+    }
+
+    :-moz-placeholder {
+        color: #56585b;
+    }
+
+    html {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Lato', sans-serif;
+        margin: 0;
+        background: url('https://source.unsplash.com/epBIrtdg2Hk/1920x1280') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        color: #0a0a0b;
+        overflow: hidden;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 0.9;
+    }
+
+    a:hover {
+        opacity: 1;
+    }
+
+    h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0 0 1.5rem;
+        text-align: center;
+    }
+
+    h1#log {
+        font-size: 2rem;
+    }
+
+    h1 .gdi {
+        font-size: 3rem;
+    }
+
+    i {
+        font-size: 1.3rem;
+    }
+
+    .c_label {
+        font-size: 1.4rem;
+        color: #fff;
+    }
+
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #fff;
+        padding: 10px 100px 0;
+    }
+
+    header nav ul {
+        display: flex;
+    }
+
+    header nav li {
+        margin: 0 15px;
+    }
+
+    header nav li:first-child {
+        margin-left: 0;
+    }
+
+    header nav li:last-child {
+        margin-right: 0;
+    }
+
+    a.btn {
+        color: #fff;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        -webkit-transition: all 0.2s;
+        -moz-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+
+    a.btn:hover {
+        background: #d73851;
+        border: 1px solid #d73851;
+        color: #fff;
+    }
+
+    .cover {
+        height: 100vh;
+        width: 100%;
+        background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.45)), to(rgba(0, 0, 0, 0.15)));
+        background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 100%);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.15) 100%);
+        padding: 20px 50px;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    input[type="search"] {
+        flex-basis: 500px;
+    }
+
+    #madeby {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        padding: 25px 100px;
+        color: #fff;
+    }
+
+    /*select box style*/
+    .big {
+        font-size: 1.2em;
+    }
+
+    /* Custom dropdown */
+    .custom-dropdown {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        margin: 10px;
+    }
+
+    .custom-dropdown select {
+        background-color: #fff;
+        color: #000;
+        font-size: inherit;
+        padding: .5em;
+        padding-right: 2.5em;
+        border: 0;
+        margin: 0;
+        border-radius: 3px;
+        text-indent: 0.01px;
+        text-overflow: '';
+        -webkit-appearance: button;
+        /* hide default arrow in chrome OSX */
+    }
+
+    .custom-dropdown::before,
+    .custom-dropdown::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .custom-dropdown::before {
+        background-color: rgba(0, 0, 0, .15);
+    }
+
+    .custom-dropdown::after {
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .social {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    .social div {
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .social div ion-icon {
+        margin: 0 auto;
+        margin-bottom: 15px;
+        color: #fff;
+        font-size: 40px;
+    }
+
+    @media all and (max-width:800px) {
+        body {
+            font-size: 0.9rem;
+        }
+
+        input[type="search"] {
+            flex-basis: 100%;
+        }
+
+        header {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            padding: 10px !important;
+        }
+
+        header h2 {
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+        }
+
+        .cover {
+            padding: 20px;
+        }
+
+        #myform {
+            text-align: center;
+        }
+
+        h1#log {
+            font-size: 1.4rem;
+        }
+
+        h1 .gdi {
+            font-size: 1.8rem;
+        }
+
+        i {
+            font-size: 1.8rem;
+        }
+
+        #madeby {
+            padding: 30px 20px;
+        }
+
+        .social {
+            margin-top: 15px;
+        }
+
+        .social div {
+            font-size: 1rem;
+        }
+
+        .social div ion-icon {
+            margin-bottom: 10px;
+            font-size: 25px;
+        }
+    }
+
+    @media all and (max-width:360px) {
+        label {
+            display: none;
+        }
+    }
+</style>
+
+<body>
+    <div class="container">
+
+        <header>
+            <h2><a href="#">
+                    <ion-icon name="transgender-outline"></ion-icon> Gen Q
+                </a></h2>
+        </header>
+
+        <div class="cover">
+            <h1>Calculate the gender equality of your favorite company</h1>
+            <form id="myform">
+                <label class="c_label" for="company-select">Choose a company:</label>
+
+                <span class="custom-dropdown big">
+                    <select name="company" id="company-select">
+                        <option value="" selected>Please choose an option</option>
+                    </select>
+                </span>
+            </form>
+            <h1 id="log"></h1>
+            <div class="social">
+                <div class="whatsup">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <a href="whatsapp://send?text=This is WhatsApp sharing example using link"
+                        data-action="share/whatsapp/share" target="_blank"> Share to WhatsApp </a>
+                </div>
+                <div class="funding">
+                    <ion-icon name="cash-outline"></ion-icon>
+                    <a href="#" target="_blank"> Support our funding campaign </a>
+                </div>
+            </div>
+            <div id="madeby">
+                <span>
+                    Photo by <a href="https://unsplash.com/@timmossholder" target="_blank">Tim Mossholder</a>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    const select = document.getElementById('company-select');
+    const log = $('#log');
+
+    function createSelect(response) {
+        const select = $('#company-select');
+        response.forEach(element => {
+            var opt = document.createElement('option');
+            opt.value = element.AZIENDA;
+            opt.innerHTML = element.AZIENDA;
+            select.append(opt);
+        });
+    };
+
+    function selectManager(response) {
+        $('#company-select').change(function () {
+            successAjax(response, $(this).val())
+        })
+    }
+
+    function successAjax(response, cname) {
+        let selectedCompany = response.find(element => element.AZIENDA === cname)
+        let arrow = selectedCompany.GDI >= 70 ?
+            `<ion-icon style='color:#1add1a' name='arrow-up-outline'></ion-icon>` :
+            `<ion-icon style="color:red" name="arrow-down-outline"></ion-icon>`
+        if (selectedCompany) {
+            log.html(`This company's gender equality index is: <div class="gdi">${selectedCompany.GDI}% ${arrow}</div>`);
+        }
+    }
+
+    async function companiesAjax() {
+        let result;
+        try {
+            result = await $.ajax({
+                async: true,
+                url: "https://genqdatabase-12f6.restdb.io/rest/gdi-database-sheet-1",
+                type: 'GET',
+                headers: {
+                    "content-type": "application/json",
+                    "x-apikey": "61138b3e69fac573b50a542f",
+                    "cache-control": "no-cache"
+                }
+            });
+
+            createSelect(result);
+            selectManager(result);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    companiesAjax();
+</script>
+
+</html>
